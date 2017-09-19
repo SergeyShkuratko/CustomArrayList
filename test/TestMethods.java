@@ -82,13 +82,27 @@ public class TestMethods {
         assertEquals(8, arrayList.lastIndexOf("lastIndexOf"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeById() {
-        arrayList.removeByIndex(0);
+        arrayList.addByIndex("testRemove", 0);
+        arrayList.addByIndex("testRemove1", 0);
+        arrayList.addByIndex("testRemove2", 0);
+        int sizeBefore = arrayList.getSize();
+        arrayList.removeByIndex(2);
+        int sizeAfter = arrayList.getSize();
+        assertEquals(sizeBefore - 1, sizeAfter);
+        assertFalse(arrayList.contains("testRemove"));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void removeElement() {
-        arrayList.remove("element0");
+        arrayList.addByIndex("testRemove", 0);
+        arrayList.addByIndex("testRemove1", 0);
+        arrayList.addByIndex("testRemove2", 0);
+        int sizeBefore = arrayList.getSize();
+        arrayList.remove("testRemove1");
+        int sizeAfter = arrayList.getSize();
+        assertEquals(sizeBefore - 1, sizeAfter);
+        assertFalse(arrayList.contains("testRemove1"));
     }
 }

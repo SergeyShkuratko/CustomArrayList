@@ -51,17 +51,24 @@ public class CustomArrayList<T> {
     }
 
     private void checkIndex(int index) {
-        if (index < 0 || index > array.length) {
+        if (index < 0 || index > array.length - 1) {
             throw new RuntimeException("Incorrect index");
         }
     }
 
     public void removeByIndex(int index) {
-        throw new UnsupportedOperationException();
+        checkIndex(index);
+        Object[] beforeIndexArray = new Object[index];
+        Object[] afterIndexArray = new Object[array.length - index];
+        System.arraycopy(array, 0, beforeIndexArray, 0, index);
+        System.arraycopy(array, index + 1, afterIndexArray, 0, array.length - index - 1);
+        System.arraycopy(beforeIndexArray, 0, array, 0, beforeIndexArray.length);
+        System.arraycopy(afterIndexArray, 0, array, index, afterIndexArray.length);
+        size--;
     }
 
     public void remove(T element) {
-        throw new UnsupportedOperationException();
+        removeByIndex(indexOf(element));
     }
 
     public Object getByIndex(int index) {
