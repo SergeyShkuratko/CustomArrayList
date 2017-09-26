@@ -32,6 +32,7 @@ public class CustomArrayList<T> {
     }
 
     public void addByIndex(T element, int index) {
+        checkIndex(index);
         if (size + 1 >= array.length) {
             increaseArray();
         }
